@@ -3,7 +3,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const healthRoutes = require("./routes/health.routes");
-const authRoutes = require("./routes/auth.routes"); // ✅ must be ABOVE app.use
+const authRoutes = require("./routes/auth.routes");
 
 const app = express();
 

@@ -1,23 +1,23 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
 
-exports.requireAuth = async (req, res, next) => {
+function requireAuth(req, res, next) {
   try {
     const token = req.cookies?.access_token;
-    if (!token) return res.status(401).json({ error: "Not authenticated" });
+    if (!token) return res.status(401).json({ message: "Not authenticated" });
 
     const payload = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(payload.sub).select("_id name email role");
-    if (!user) return res.status(401).json({ error: "User not found" });
-
-    req.user = { id: user._id.toString(), name: user.name, email: user.email, role: user.role };
+    req.user = payload; // { id, role, email }
     next();
   } catch (err) {
-    return res.status(401).json({ error: "Invalid token" });
+    return res.status(401).json({ message: "Invalid or expired token" });
   }
-};
+}
 
-exports.requireAdmin = (req, res, next) => {
-  if (req.user?.role !== "admin") return res.status(403).json({ error: "Admin only" });
+function requireAdmin(req, res, next) {
+  if (req.user?.role !== "admin") {
+    return res.status(403).json({ message: "Admin access required" });
+  }
   next();
-};
+}
+
+module.exports = { requireAuth, requireAdmin };
