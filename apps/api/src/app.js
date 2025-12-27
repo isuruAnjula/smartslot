@@ -5,6 +5,9 @@ const cookieParser = require("cookie-parser");
 const healthRoutes = require("./routes/health.routes");
 const authRoutes = require("./routes/auth.routes");
 
+const availabilityRoutes = require("./routes/availability.routes");
+const bookingRoutes = require("./routes/booking.routes");
+
 const app = express();
 
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
@@ -14,4 +17,8 @@ app.use(cookieParser());
 app.use("/api/health", healthRoutes);
 app.use("/api/auth", authRoutes);
 
+app.use("/api/availability", availabilityRoutes);
+app.use("/api/bookings", bookingRoutes);
+
 module.exports = app;
+
