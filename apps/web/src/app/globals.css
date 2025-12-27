@@ -1,0 +1,12 @@
+/* Global styles for SmartSlot */
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans",
+      sans-serif;
+  }
+  
