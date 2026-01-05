@@ -8,6 +8,8 @@ const authRoutes = require("./routes/auth.routes");
 const availabilityRoutes = require("./routes/availability.routes");
 const bookingRoutes = require("./routes/booking.routes");
 
+const slotsRoutes = require("./routes/slots.routes");
+
 const app = express();
 
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
@@ -19,6 +21,8 @@ app.use("/api/auth", authRoutes);
 
 app.use("/api/availability", availabilityRoutes);
 app.use("/api/bookings", bookingRoutes);
+
+app.use("/api/slots", slotsRoutes);
 
 module.exports = app;
 
