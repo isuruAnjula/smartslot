@@ -39,12 +39,14 @@ export default function BookingsPage() {
   }, []);
 
   return (
+    
     <div className="p-6 space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">My Bookings</h1>
-        <Link className="border rounded px-3 py-2" href="/bookings/new">
+        {/* <Link className="border rounded px-3 py-2" href="/bookings/new">
           + New Booking
-        </Link>
+        </Link> */}
+        <Link className="underline" href="/bookings/new">New Booking</Link>
       </div>
 
       {loading && <p>Loading...</p>}
