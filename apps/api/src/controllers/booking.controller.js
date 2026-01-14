@@ -13,7 +13,9 @@ async function createBooking(req, res) {
     return res.status(400).json({ message: "Invalid input", errors: parsed.error.flatten() });
   }
 
-  if (!req.user?.id) return res.status(401).json({ message: "Unauthorized" });
+  if (!req.user?.id) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
 
   const start = new Date(parsed.data.startTime);
   const end = new Date(parsed.data.endTime);
@@ -22,6 +24,7 @@ async function createBooking(req, res) {
     return res.status(400).json({ message: "startTime must be before endTime" });
   }
 
+  // prevent double-booking (overlap check)
   const conflict = await Booking.findOne({
     status: { $ne: "cancelled" },
     startTime: { $lt: end },
