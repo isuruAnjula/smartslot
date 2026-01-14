@@ -24,7 +24,7 @@ async function createBooking(req, res) {
     return res.status(400).json({ message: "startTime must be before endTime" });
   }
 
-  // prevent double-booking (overlap)
+  // Prevent double booking (overlap)
   const conflict = await Booking.findOne({
     status: { $ne: "cancelled" },
     startTime: { $lt: end },
